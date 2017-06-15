@@ -43,6 +43,19 @@ public class SampleController {
     return "{\"result\":" + result + "}";
   }
 
+  @RequestMapping(value="/api/math/multiply", method = RequestMethod.POST)
+  public @ResponseBody String multiply(@RequestBody String jsonString) {
+    JSONObject operands = new JSONObject(jsonString);
+    long num1 = operands.getInt("num1");
+    long num2 = operands.getInt("num2");
+    long result = num1 * num2;
+
+    // Sanity Check
+    System.out.println("num1: " + new Long(num1).toString() + "num2: " + new Long(num2).toString());
+
+    return "{\"result\":" + result + "}";
+  }
+
   public static void main(String[] args) throws Exception {
     SpringApplication.run(SampleController.class, args);
   }
