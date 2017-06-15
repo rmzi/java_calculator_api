@@ -19,15 +19,16 @@ public class SampleController {
 
   @RequestMapping(value="/api/math/add", method = RequestMethod.POST)
   public @ResponseBody String addition(@RequestBody String jsonString) {
+    System.out.println(jsonString);
     JSONObject operands = new JSONObject(jsonString);
-    long num1 = Long.parseLong(operands.getString("num1"));
-    long num2 = Long.parseLong(operands.getString("num2"));
+    long num1 = operands.getInt("num1");
+    long num2 = operands.getInt("num2");
     long result = num1 + num2;
 
     // Sanity Check
     System.out.println("num1: " + new Long(num1).toString() + "num2: " + new Long(num2).toString());
 
-    return "{'result':'" + result + "'}";
+    return "{\"result\":" + result + "}";
   }
 
   public static void main(String[] args) throws Exception {
